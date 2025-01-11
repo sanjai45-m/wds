@@ -73,7 +73,9 @@ class _AddServiceUiState extends State<AddServiceUi> {
         ServiceCard(
           title: "Clothing Hanging on a Clothing",
           price: "Rs. 15,000",
-          imagePath: "assets/website-assets/product.png",
+          imagePaths:[ "assets/website-assets/product.png",
+            "assets/website-assets/product.png",
+            "assets/website-assets/product.png"],
           isActive: isActive,
           onEdit: () {
             Navigator.of(context).push(MaterialPageRoute(
@@ -95,7 +97,9 @@ class _AddServiceUiState extends State<AddServiceUi> {
         ServiceCard(
           title: "Clothing Hanging on a Clothing",
           price: "Rs. 15,000",
-          imagePath: "assets/website-assets/product.png",
+          imagePaths:[ "assets/website-assets/product.png",
+            "assets/website-assets/product.png",
+            "assets/website-assets/product.png"],
           isActive: isActive,
           onEdit: () {
             Navigator.of(context).push(MaterialPageRoute(

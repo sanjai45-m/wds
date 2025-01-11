@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dismissible_page/dismissible_page.dart'; // Import the package
 
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
-  final String imagePath;
+  final List<String> imagePaths; // List of image paths for the carousel
   final bool isActive;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
@@ -14,7 +16,7 @@ class ProductCard extends StatelessWidget {
   ProductCard({
     required this.title,
     required this.price,
-    required this.imagePath,
+    required this.imagePaths,
     required this.isActive,
     required this.onEdit,
     required this.onDelete,
@@ -71,7 +73,44 @@ class ProductCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Image.asset(imagePath),
+              child: CarouselSlider(
+                items: imagePaths.map((path) {
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to the full-screen image view
+                      context.pushTransparentRoute(
+                        DismissiblePage(
+                          onDismissed: () => Navigator.of(context).pop(),
+                          child: Scaffold(
+                            body: Center(
+                              child: Image.asset(
+                                path,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: AssetImage(path),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                  height: 200,
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                ),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

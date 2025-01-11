@@ -32,6 +32,8 @@ dev_dependencies:
   share_plus:
   flex_color_picker:
   intl:
+  carousel_slider:
+  dismissible_page:
 flutter:
 
 
